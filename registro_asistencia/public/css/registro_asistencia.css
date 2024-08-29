@@ -1,0 +1,316 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Ensure full width */
+}
+
+.app-layout-container {
+    display: flex;
+    width: 100%;
+    flex: 1;
+}
+
+.app-sidebar-nav {
+    background-color: #ffffff;
+    color: #2c3e50;
+    width: 200px;
+    height: 100vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    z-index: 1;
+}
+
+.app-sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.app-sidebar-nav li {
+    width: 100%;
+    padding: 12px 18px; /* Ajuste ligero al padding */
+    cursor: pointer;
+    text-align: start;
+    margin-left: 15px;
+    transition: background-color 0.3s;
+    box-sizing: border-box;
+}
+
+.app-sidebar-nav li:hover {
+    background-color: #f0f2f5;
+}
+
+.app-sidebar-nav li i {
+    margin-right: 10px;
+}
+
+.app-main-content-area {
+    flex: 1;
+    padding: 18px; /* Reduje ligeramente el padding */
+    background-color: #f0f2f5;
+    min-height: calc(100vh - 60px);
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.app-section {
+    display: none;
+    margin: 0 auto;
+    max-width: 850px; /* Reduje ligeramente el ancho máximo de las secciones */
+    padding-left: 0px; /* Asegúrate de que no haya padding a la izquierda */
+    padding-right: 0px; /* Asegúrate de que no haya padding a la derecha */
+    box-sizing: border-box; /* Asegúrate de que el padding no expanda el tamaño del contenedor */
+}
+
+.app-section.active {
+    display: block;
+}
+
+h3 {
+    font-weight: 500; /* Cambia el peso a un nivel medio */
+    color: #2c3e50; /* Color del texto */
+    font-size: 1.55em; /* Tamaño de fuente */
+    margin-bottom: 10px; /* Margen inferior */
+    margin-top: 0;
+    padding: 0;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+
+.attendance-card, .task-card, .pause-card, .task-summary-card, .record-summary-card, .pause-history-card, .overall-summary-card {
+    background-color: #ffffff;
+    border-radius: 8px; /* Reduje ligeramente el radio de los bordes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px; /* Reduje ligeramente el padding */
+    margin-bottom: 18px;
+    border: 1px solid #ddd;
+    width: 100%; /* Asegura que las tarjetas ocupen todo el ancho */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+    margin-left: 0; /* Asegúrate de que no haya margen lateral izquierdo */
+    margin-right: 0; /* Asegúrate de que no haya margen lateral derecho */
+}
+
+.card-body {
+    padding: 18px; /* Reduje ligeramente el padding */
+}
+
+.form-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px; /* Mantuve el padding para los campos de texto */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px; /* Mantuve el tamaño de la fuente */
+    margin-bottom: 10px;
+}
+
+.check-in-out-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.check-in-out-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.check-in-out-time {
+    font-size: 1em;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.button-group, .record-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.action-button {
+    padding: 8px 10px; /* Reduje ligeramente el padding */
+    font-size: 15px; /* Reduje ligeramente el tamaño de la fuente */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    max-width: 160px; /* Reduje ligeramente el tamaño máximo de los botones */
+}
+
+.action-button.primary {
+    background-color: #2c3e50;
+}
+
+.action-button.secondary {
+    background-color: #EDEDED; /* Fondo del botón */
+    color: #2D3E51; /* Color del texto */
+}
+
+.action-button.primary:hover {
+    background-color: #1a242f;
+}
+
+.action-button.secondary:hover {
+    background-color: #DADADA; /* Fondo más oscuro al pasar el cursor */
+    color: #2D3E51; /* Mantener el color del texto */
+}
+
+.button-task {
+    display: flex;
+    justify-content: center; /* Esto centrará los botones en el contenedor */
+    gap: 10px; /* Ajusta este valor para dar algo de espacio entre los botones */
+}
+
+.button-task .action-button {
+    width: auto; /* Asegúrate de que los botones no tengan un ancho fijo */
+}
+
+
+#workTimerDisplay, #timerDisplay, #taskTimerDisplay {
+    font-size: 1.4em; /* Reduje ligeramente el tamaño del temporizador */
+    margin-top: 10px;
+    text-align: center;
+}
+
+.overall-summary-card {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px; /* Reduje ligeramente el padding */
+    border: 1px solid #ddd;
+    margin-bottom: 18px;
+}
+
+.summary-cards-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-left: 0; /* Asegura que no haya margen izquierdo */
+}
+
+.summary-item {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px; /* Reduje ligeramente el padding */
+    margin: 10px;
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.summary-item h4 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.summary-item p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #666;
+}
+
+.task-summary-table, .break-summary-table, .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.task-summary-table th, .task-summary-table td, 
+.break-summary-table th, .break-summary-table td, 
+.summary-table th, .summary-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.task-summary-table th, .break-summary-table th, .summary-table th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.status-message {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1em;
+    color: #333;
+}
+
+/* Estilo para las filas en paralelo en la primera sección */
+.row {
+    display: flex;
+    gap: 18px; /* Reduje ligeramente el espacio entre las tarjetas */
+    justify-content: space-between; /* Asegura que los elementos se distribuyan uniformemente */
+    margin-left: 0; /* Asegúrate de que no haya margen lateral */
+    margin-right: 0; /* Asegúrate de que no haya margen lateral */
+    box-sizing: border-box;
+}
+
+.attendance-card, .pause-card {
+    flex: 1;
+    min-width: 0;
+}
+
+.pause-history-card {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Estilo para botones deshabilitados */
+button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Ajuste del botón en la sección de registros */
+.button-group.record-buttons button {
+    flex: 1;
+    margin: 0 5px;
+}
+
+#totalHoursContainer {
+    margin-top: 15px;
+    text-align: right;
+    font-family: inherit; /* Heredar la fuente de su contenedor */
+}
+
+#totalHoursContainer {
+    color: #2D3E51; /* Color azul oscuro */
+    font-family: inherit; /* Heredar la fuente del contenedor */
+}
+
+#totalHours, #totalWorkedHours, #totalPauseTime {
+    color: #6c757d; /* Color gris */
+    font-family: inherit; /* Heredar la fuente del contenedor */
+}
+
+
+/* CSS por defecto para tooltips usando el atributo title */
+.task-summary-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Ajusta según lo necesites */
+    position: relative;
+}
+

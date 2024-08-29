@@ -1,0 +1,30 @@
+{
+    "doctype": "DocType",
+    "name": "App Settings",
+    "module": "Registro de Asistencia",
+    "custom": 0,
+    "fields": [
+        {
+            "fieldname": "enable_task_tracking",
+            "fieldtype": "Check",
+            "label": "Enable Task Tracking"
+        },
+        {
+            "fieldname": "enable_records_section",
+            "fieldtype": "Check",
+            "label": "Enable Records Section"
+        },
+        {
+            "fieldname": "enable_time_tracking",
+            "fieldtype": "Check",
+            "label": "Enable Time Tracking"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager"
+        }
+    ],
+    "istable": 0,
+    "issingle": 1
+}

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Asistencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Cargar el CSS desde la carpeta pública de tu aplicación -->
+    <link rel="stylesheet" href="/assets/registro_asistencia/css/registro_asistencia.css">
+</head>
+<body>
+    <div class="app-layout-container">
+        <nav class="app-sidebar-nav">
+            <ul>
+                <li onclick="showSection('attendance')"><i class="fas fa-user-check"></i> Asistencia</li>
+                <li onclick="showSection('tasks')" id="tasks-link"><i class="fas fa-tasks"></i> Tareas</li>
+                <li onclick="showSection('records')" id="records-link"><i class="fas fa-clipboard-list"></i> Registros</li>
+            </ul>
+        </nav>
+
+        <main class="app-main-content-area">
+            <!-- Sección de Asistencia -->
+            <section id="attendance" class="app-section active">
+                <h3>Registro de Asistencia</h3>
+                <div class="row">
+                    <div class="attendance-card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="employee-id"><i class="fas fa-user"></i> Empleado:</label>
+                                <select id="employee-id" class="form-control"></select>
+                            </div>
+                            <div class="check-in-out-row">
+                                <div class="check-in-out-group">
+                                    <button id="check-in-button" class="action-button primary" onclick="checkIn()"><i class="fas fa-sign-in-alt"></i> Check-In</button>
+                                    <span id="lastCheckInTime" class="check-in-out-time" style="display:none;">Último Check-In: --:--</span>
+                                </div>
+                                <div class="check-in-out-group">
+                                    <button id="check-out-button" class="action-button secondary" onclick="checkOut()" disabled><i class="fas fa-sign-out-alt"></i> Check-Out</button>
+                                    <span id="lastCheckOutTime" class="check-in-out-time" style="display:none;">Último Check-Out: --:--</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Temporizador para las horas trabajadas -->
+                            <div id="workTimerDisplay" style="display:none" class="time-related">00:00:00</div>
+                            <div id="attendanceMessage" class="status-message"></div>
+                            
+                        </div>
+                    </div>
+                    <div class="pause-card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="pause-reason"><i class="fas fa-edit"></i> Motivo de la pausa:</label>
+                                <input type="text" id="pause-reason" class="form-control" placeholder="Ingrese el motivo de la pausa">
+                            </div>
+                            <div class="check-in-out-row">
+                                <div class="check-in-out-group">
+                                    <button id="start-pause-button" class="action-button primary" onclick="startPause()"><i class="fas fa-pause"></i> Iniciar Pausa</button>
+                                    <span id="pauseStartTime" class="check-in-out-time" style="display:none;" class="time-related">Inicio de Pausa: --:--</span>
+                                </div>
+                                <div class="check-in-out-group">
+                                    <button id="end-pause-button" class="action-button secondary" onclick="endPause()" disabled><i class="fas fa-play"></i> Terminar Pausa</button>
+                                    <span id="pauseEndTime" class="check-in-out-time" style="display:none;" class="time-related">Fin de Pausa: --:--</span>
+                                </div>
+                            </div>
+                            <div id="timerDisplay" style="display:none;" class="time-related">00:00:00</div>
+                            <div id="pauseMessage" class="status-message"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pause-history-card">
+                    <div class="card-body">
+                        <!-- <h3>Historial de Pausas</h3> -->
+                        
+                        <table id="breakSummary" class="break-summary-table">
+                            <thead>
+                                <tr>
+                                    <th>Motivo</th>
+                                    <th class="time-related">Inicio</th>
+                                    <th class="time-related">Fin</th>
+                                    <th class="time-related">Duración</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Aquí se rellenarán las filas dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Contenedores para mostrar totales -->
+                    <div id="totalHoursContainer" class="time-related">
+                        <div>Total horas trabajadas: <span id="totalWorkedHours">00:00:00</span></div>
+                        <div>Total tiempo en pausas: <span id="totalPauseTime">00:00:00</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Tareas -->
+            <section id="tasks" class="app-section">
+                <h3>Gestión de Tareas</h3>
+                <div class="task-card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="task-select"><i class="fas fa-tasks"></i> Seleccionar Tarea:</label>
+                            <select id="task-select" class="form-control"></select>
+                        </div>
+                        <div class="button-group button-task">
+                            <button id="start-task-button" class="action-button primary" onclick="startTask()"><i class="fas fa-play"></i> Empezar Tarea</button>
+                            <button id="end-task-button" class="action-button secondary" onclick="endTask()" disabled><i class="fas fa-stop"></i> Terminar Tarea</button>
+                        </div>
+                        <div id="taskTimerDisplay" class="time-related">Tiempo en Tarea: 00:00:00</div>
+                    </div>
+                </div>
+                
+                <h3>Resumen de Tareas de Hoy</h3>
+
+                <div class="task-summary-card">
+                    <div class="card-body">
+                        <table id="taskSummary" class="task-summary-table">
+                            <thead>
+                                <tr>
+                                    <th>Tarea</th>
+                                    <th class="time-related">Desde</th>
+                                    <th class="time-related">Hasta</th>
+                                    <th class="time-related">Tiempo Trabajado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Aquí se rellenarán las filas dinámicamente -->
+                            </tbody>
+                        </table>
+                        
+                        <div id="totalHoursContainer" class="time-related">
+                            <div>Total horas: </div><span id="totalHours" ></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Registros -->
+            <section id="records" class="app-section">
+                <h3>Registros Completos</h3>
+                <div class="button-group record-buttons">
+                    <button class="action-button primary" onclick="showRecords('daily')">Diario</button>
+                    <button class="action-button secondary" onclick="showRecords('weekly')">Semanal</button>
+                    <button class="action-button secondary" onclick="showRecords('monthly')">Mensual</button>
+                </div>
+            
+                <!-- Diario -->
+                <div id="dailySummary" class="record-summary-container">
+                    <div class="record-summary-card">
+                        <div class="card-body">
+                            <h3>Check-In/Check-Out Diario</h3>
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Check-In</th>
+                                        <th>Check-Out</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Filas dinámicas -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="record-summary-card">
+                        <div class="card-body">
+                            <h3>Pausas Diarias</h3>
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Motivo</th>
+                                        <th>Inicio</th>
+                                        <th>Fin</th>
+                                        <th>Duración</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Filas dinámicas -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="record-summary-card">
+                        <div class="card-body">
+                            <h3>Tareas Diarias</h3>
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tarea</th>
+                                        <th>Tiempo Trabajado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Filas dinámicas -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Semanal -->
+                <div id="weeklySummary" class="record-summary-container" style="display: none;">
+                    <div class="record-summary-card">
+                        <div class="card-body">
+                            <h3>Check-In/Check-Out Semanal</h3>
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Check-In</th>
+                                        <th>Check-Out</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Filas dinámicas -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="record-summary-card">
+                        <div class="card-body">
+                            <h3>Pausas Semanales</h3>
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Motivo</th>
+                                        <th>Inicio</th>
+                                        <th>Fin</th>
+                                        <th>Duración</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Filas dinámicas -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="record-summary-card">
+                        <div class="card-body">
+                            <h3>Tareas Semanales</h3>
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tarea</th>
+                                        <th>Tiempo Trabajado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Filas dinámicas -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Mensual -->
+                <div id="monthlySummary" class="record-summary-container" style="display: none;">
+                    <div class="record-summary-card">
+                        <div class="card-body">
+                            <h3>Check-In/Check-Out Mensual</h3>
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Check-In</th>
+                                        <th>Check-Out</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Filas dinámicas -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="record-summary-card">
+                        <div class="card-body">
+                            <h3>Pausas Mensuales</h3>
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Motivo</th>
+                                        <th>Inicio</th>
+                                        <th>Fin</th>
+                                        <th>Duración</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Filas dinámicas -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="record-summary-card">
+                        <div class="card-body">
+                            <h3>Tareas Mensuales</h3>
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tarea</th>
+                                        <th>Tiempo Trabajado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Filas dinámicas -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Summary Card -->
+                <div class="overall-summary-card">
+                    <div class="summary-cards-container">
+                        <div class="summary-item">
+                            <h4>Horas Trabajadas Hoy</h4>
+                            <p>Total: <span id="dailyTotal">00:00</span></p>
+                            <p>Pausas: <span id="dailyBreaks">00:00</span></p>
+                        </div>
+                        <div class="summary-item">
+                            <h4>Horas Trabajadas Esta Semana</h4>
+                            <p>Total: <span id="weeklyTotal">00:00</span></p>
+                            <p>Pausas: <span id="weeklyBreaks">00:00</span></p>
+                        </div>
+                        <div class="summary-item">
+                            <h4>Horas Trabajadas Este Mes</h4>
+                            <p>Total: <span id="monthlyTotal">00:00</span></p>
+                            <p>Pausas: <span id="monthlyBreaks">00:00</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="/assets/registro_asistencia/js/registro_asistencia.js"></script>
+</body>
+</html>
