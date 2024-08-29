@@ -19,7 +19,7 @@ def get_data():
                 },
                 {
                     "type": "page",
-                    "name": "registro_asistencia",
+                    "name": "registro-asistencia",
                     "label": _("Registro de Asistencia"),
                     "description": _("Página principal de Registro de Asistencia."),
                     "icon": "fa fa-check-square"

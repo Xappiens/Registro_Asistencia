@@ -30,7 +30,7 @@ web_include_js = [
 
 # Asegura que la página web `registro_asistencia.html` esté accesible
 website_route_rules = [
-    {"from_route": "/registro_asistencia", "to_route": "registro_asistencia"}
+    {"from_route": "/registro-asistencia", "to_route": "registro_asistencia"}
 ]
 # Apps
 # ------------------
