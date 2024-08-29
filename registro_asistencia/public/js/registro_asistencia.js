@@ -49,7 +49,7 @@ function updateBreakHistoryTable(breaks) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    fetchAppSettings();  // Cargar las configuraciones de la aplicación
+    desactiveOptions();
     loadCurrentEmployee();
     loadDailyBreaks();
     showSection('attendance');
@@ -63,6 +63,35 @@ function showSection(sectionId) {
         section.classList.remove('active');
     });
     document.getElementById(sectionId).classList.add('active');
+}
+
+// Function to apply user settings
+function desactiveOptions() {
+    frappe.call({
+        method: 'registro_asistencia.registro_de_asistencia.doctype.app_settings.app_settings.get_app_settings',
+        callback: function(response) {
+            appSettings = response.message || {};
+
+            // Si el seguimiento de tareas está desactivado, oculta la sección de tareas
+            if (!appSettings.enable_task_tracking) {
+                document.getElementById('tasks').style.display = 'none';
+                document.getElementById('tasks-link').style.display = 'none';
+            }
+
+            // Si la sección de registros está desactivada, oculta esa sección
+            if (!appSettings.enable_records_section) {
+                document.getElementById('records').style.display = 'none';
+                document.getElementById('records-link').style.display = 'none';
+            }
+
+            // Si el seguimiento del tiempo está desactivado, oculta todos los elementos relacionados con el tiempo
+            if (!appSettings.enable_time_tracking) {
+                document.querySelectorAll('.time-related').forEach(el => {
+                    el.style.display = 'none';
+                });
+            }
+        }
+    });
 }
 
 // Identificar empleado >> Llama API de Maxi

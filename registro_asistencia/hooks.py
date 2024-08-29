@@ -20,12 +20,10 @@ doc_events = {
 }
 
 app_include_js = [
-    "/assets/registro_asistencia/js/app_settings.js",
     "/assets/registro_asistencia/js/registro_asistencia.js"
 ]
 
 web_include_js = [
-    "/assets/registro_asistencia/js/app_settings.js",
     "/assets/registro_asistencia/js/registro_asistencia.js"
 ]
 
