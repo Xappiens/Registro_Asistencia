@@ -5,7 +5,7 @@ function loadDailyBreaks() {
     const employeeId = document.getElementById('employee-id').value;
 
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'get_daily_breaks', employee_id: employeeId },
         callback: function (response) {
             if (response.message) {
@@ -97,7 +97,7 @@ function desactiveOptions() {
 // Identificar empleado >> Llama API de Maxi
 function loadCurrentEmployee() {
     frappe.call({
-        method: 'check_employee',
+        method: 'registro_asistencia.registro_de_asistencia.check_employee.check_employee',
         callback: function (response) {
             const message = response.message;
             if (message.status === "Employee") {
@@ -163,7 +163,7 @@ function loadTasks(employeeId) {
 
 function loadEmployeeStatus(employeeId) {
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'get_employee_status', employee_id: employeeId },
         callback: function (response) {
             const status = response.message.status;
@@ -223,7 +223,7 @@ let totalPauseSeconds = 0;  // Para calcular el total de tiempo en pausas
 function checkIn() {
     const employeeId = document.getElementById('employee-id').value;
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'check_in', employee: employeeId },
         callback: function(response) {
             if (response.message.success) {
@@ -243,7 +243,7 @@ function checkIn() {
 function checkOut() {
     const employeeId = document.getElementById('employee-id').value;
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'check_out', employee: employeeId },
         callback: function(response) {
             if (response.message.success) {
@@ -306,7 +306,7 @@ function startPause() {
     }
 
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'break_start', employee: employeeId, reason: pauseReason },
         callback: function(response) {
             if (response.message.success) {
@@ -354,7 +354,7 @@ function endPause() {
     const employeeId = document.getElementById('employee-id').value;
 
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'break_end', employee: employeeId },
         callback: function(response) {
             if (response.message.success) {
@@ -470,7 +470,7 @@ let taskTimerInterval;
 function loadWeeklyTimeSheet() {
     const employeeId = document.getElementById('employee-id').value;
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'get_or_create_weekly_timesheet', employee_id: employeeId },
         callback: function (response) {
             if (response.message.success) {
@@ -490,7 +490,7 @@ function startTask() {
     const taskName = document.getElementById('task-select').value;
 
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: {
             method: 'start_task',
             employee: employeeId,
@@ -518,7 +518,7 @@ function endTask() {
     const taskName = document.getElementById('task-select').value;
 
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'end_task', employee: employeeId, task_name: taskName },
         callback: function(response) {
             if (response.message.success) {
@@ -540,7 +540,7 @@ function checkTaskStatus() {
     const employeeId = document.getElementById('employee-id').value;
 
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'get_task_status', employee: employeeId },
         callback: function (response) {
             const taskSelect = document.getElementById('task-select');
@@ -578,7 +578,7 @@ function enableEndTaskButton() {
 
 function loadTaskStatus(employeeId) {
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'get_task_status', employee_id: employeeId },
         callback: function (response) {
             console.log("Respuesta:", response);
@@ -658,7 +658,7 @@ function clearTaskTimer() {
 // Llamada para cargar las tareas de la semana
 function loadWeeklyTasks(employeeId) {
     frappe.call({
-        method: 'registro_empleados',
+        method: 'registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia',
         args: { method: 'get_today_tasks', employee_id: employeeId },
         callback: function (response) {
             //console.log("Respuesta recibida:", response);

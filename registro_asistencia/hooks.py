@@ -5,6 +5,20 @@ app_description = "Usa ésta APP para llevar el registro de asistencia y ejecuci
 app_email = "xappiens@xappiens.com"
 app_license = "mit"
 
+
+
+# hooks.py
+
+override_whitelisted_methods = {
+    "registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia": "registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia",
+    "registro_asistencia.registro_de_asistencia.check_employee.check_employee": "registro_asistencia.registro_de_asistencia.check_employee.check_employee",
+    "registro_asistencia.registro_de_asistencia.doctype.app_settings.app_settings.get_app_settings": "registro_asistencia.registro_de_asistencia.doctype.app_settings.app_settings.get_app_settings"
+}
+
+doc_events = {
+    # Aquí podrías añadir otros eventos relacionados con Doctypes si los tienes.
+}
+
 # Apps
 # ------------------
 
