@@ -19,6 +19,21 @@ doc_events = {
     # Aquí podrías añadir otros eventos relacionados con Doctypes si los tienes.
 }
 
+app_include_js = [
+    "/assets/registro_asistencia/js/app_settings.js",
+    "/assets/registro_asistencia/js/registro_asistencia.js"
+]
+
+web_include_js = [
+    "/assets/registro_asistencia/js/app_settings.js",
+    "/assets/registro_asistencia/js/registro_asistencia.js"
+]
+
+
+# Asegura que la página web `registro_asistencia.html` esté accesible
+website_route_rules = [
+    {"from_route": "/registro_asistencia", "to_route": "registro_asistencia"}
+]
 # Apps
 # ------------------
 
