@@ -1,29 +1,44 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Asistencia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-
-        <!-- Importar Frappe.js -->
-        <script src="/assets/frappe/js/frappe.min.js"></script>
-
-        <!-- Importar jQuery -->
-        <script src="/assets/frappe/js/lib/jquery/jquery.min.js"></script>
     
-        <!-- Importar Bootstrap CSS y JS -->
-        <link rel="stylesheet" href="/assets/frappe/css/bootstrap.css">
-        <script src="/assets/frappe/js/lib/bootstrap.min.js"></script>
-    
-        <!-- Importar Font Awesome -->
-        <link rel="stylesheet" href="/assets/frappe/css/font-awesome.css">
+    <!-- Frappe Styles -->
+    <link rel="stylesheet" href="/assets/frappe/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/frappe/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/frappe/css/frappe-web.css">
+    <link rel="stylesheet" href="/assets/frappe/css/frappe-ui.css">
+
+    <!-- Tu propio CSS -->
     <link rel="stylesheet" href="/assets/registro_asistencia/css/registro_asistencia.css">
-    <script src="/assets/frappe/js/frappe.min.js"></script>
-    <script src="/assets/registro_asistencia/js/registro_asistencia.js"></script>
 </head>
 <body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/app">
+                    <i class="fa fa-home"></i> Frappe
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/app">Desk</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/app/user"><i class="fa fa-user"></i> {{ frappe.session.user_fullname }}</a></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="app-layout-container">
         <nav class="app-sidebar-nav">
             <ul>
@@ -349,6 +364,13 @@
 
         </main>
     </div>
+        <!-- Frappe JS -->
+        <script src="/assets/frappe/js/frappe.min.js"></script>
+        <script src="/assets/frappe/js/lib/jquery/jquery.min.js"></script>
+        <script src="/assets/frappe/js/lib/bootstrap.min.js"></script>
+    
+        <!-- Tu propio JS -->
+        <script src="/assets/registro_asistencia/js/registro_asistencia.js"></script>
 
 </body>
 </html>
