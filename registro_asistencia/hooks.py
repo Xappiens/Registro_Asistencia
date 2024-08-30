@@ -9,6 +9,9 @@ app_license = "mit"
 
 # hooks.py
 
+after_install = "registro_asistencia.install.after_install"
+
+
 override_whitelisted_methods = {
     "registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia": "registro_asistencia.registro_de_asistencia.registro_asistencia.registro_asistencia",
     "registro_asistencia.registro_de_asistencia.check_employee.check_employee": "registro_asistencia.registro_de_asistencia.check_employee.check_employee",

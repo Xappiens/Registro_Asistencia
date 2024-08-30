@@ -10,9 +10,7 @@ def get_data():
             "type": "module",
             "description": "Configuración de la app Registro de Asistencia",
             "onboard_present": 1,
-            "color": "#3498db",
-            "doctype": "App Settings",
-            "link": "Form/App Settings"
+            "color": "#3498db"
         },
         {
             "type": "doctype",
@@ -22,16 +20,16 @@ def get_data():
             "icon": "octicon octicon-gear",
             "module": "Registro de Asistencia",
             "color": "#FF5733",
-            "link": "Form/App Settings/App Settings"
+            "link": "Form/App Settings"
         },
         {
             "type": "page",
-            "name": "registro-asistencia",
+            "name": "registro_asistencia",
             "label": _("Registro de Asistencia"),
             "description": _("Página principal de Registro de Asistencia."),
             "icon": "fa fa-check-square",
             "module": "Registro de Asistencia",
             "color": "#FF5733",
-            "link": "/registro_asistencia"
+            "link": "/registro-asistencia"
         }
     ]

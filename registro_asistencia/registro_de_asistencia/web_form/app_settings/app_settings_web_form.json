@@ -1,0 +1,28 @@
+{
+    "doctype": "Web Form",
+    "module": "Registro de Asistencia",
+    "title": "App Settings",
+    "doc_type": "App Settings",
+    "is_standard": 1,
+    "web_form_fields": [
+        {
+            "fieldname": "enable_task_tracking",
+            "fieldtype": "Check",
+            "label": "Enable Task Tracking"
+        },
+        {
+            "fieldname": "enable_records_section",
+            "fieldtype": "Check",
+            "label": "Enable Records Section"
+        },
+        {
+            "fieldname": "enable_time_tracking",
+            "fieldtype": "Check",
+            "label": "Enable Time Tracking"
+        }
+    ],
+    "role": "System Manager",
+    "login_required": 1,
+    "allow_edit": 1,
+    "route": "app-settings"
+}
