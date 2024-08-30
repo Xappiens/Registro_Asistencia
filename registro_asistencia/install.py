@@ -1,6 +1,9 @@
+import frappe
+from frappe import _
+
 def after_install():
     # Verificar si HRMS está instalado
-    if not frappe.get_installed_apps().__contains__('hrms'):
+    if 'hrms' not in frappe.get_installed_apps():
         frappe.throw(_("HRMS module is required to install this app"))
     
     # Añadir campos personalizados a Attendance
@@ -27,6 +30,7 @@ def add_custom_fields_to_attendance():
             'fieldtype': 'Time',
             'insert_after': 'custom_hora_de_entrada'
         }).insert()
+    
     if not frappe.db.exists('Custom Field', 'Attendance-custom_tipo_de_registro'):
         frappe.get_doc({
             'doctype': 'Custom Field',
