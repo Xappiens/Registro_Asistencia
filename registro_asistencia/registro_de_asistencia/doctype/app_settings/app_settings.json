@@ -1,6 +1,6 @@
 {
     "doctype": "DocType",
-    "name": "App Settings",
+    "name": "Registro Asistencia Settings",
     "module": "Registro de Asistencia",
     "custom": 0,
     "fields": [

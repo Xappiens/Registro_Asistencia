@@ -10,7 +10,7 @@ class AppSettings(Document):
 @frappe.whitelist()
 def get_app_settings():
     """Función para recuperar las configuraciones desde el frontend."""
-    settings = frappe.get_single("App Settings")
+    settings = frappe.get_single("Registro Asistencia Settings")
     return {
         "enable_task_tracking": settings.enable_task_tracking,
         "enable_records_section": settings.enable_records_section,
@@ -19,4 +19,4 @@ def get_app_settings():
 
 def on_doctype_update():
     """Función opcional que se ejecuta cada vez que se actualiza el Doctype."""
-    frappe.db.updatedb("App Settings")
+    frappe.db.updatedb("Registro Asistencia Settings")
